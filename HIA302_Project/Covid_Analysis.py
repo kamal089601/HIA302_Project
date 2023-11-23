@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-
+print('Testing')
 df = pd.read_csv('aefi.csv')
 
 null_value = df.isna().sum()
