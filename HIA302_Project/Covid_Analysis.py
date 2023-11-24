@@ -4,15 +4,49 @@ import matplotlib.pyplot as plt
 
 
 df = pd.read_csv('aefi.csv')
+df2 = pd.read_csv('vax_malaysia.csv')
 
-result_2 = df[98:646].copy()
 
-columns = result_2.columns
-
-new_df = result_2.drop(['date', 'daily_serious_npra', 'daily_nonserious', 
+new_df = df.drop(['daily_serious_npra', 'daily_nonserious', 
          'daily_nonserious_npra', 'd1_site_pain', 'd2_site_pain'], axis=1, inplace=True)
 
+new_df_2 = df2.drop(['daily_partial', 'daily_full', 'daily_booster', 'daily_booster2','daily',
+                   'daily_partial_adol', 'daily_full_adol', 'daily_booster_adol','daily_booster2_adol'
+                   ,'daily_partial_child', 'daily_full_child', 'daily_booster_child',
+                   'daily_booster2_child', 'cumul_partial', 'cumul_full', 'cumul_booster',
+                   'cumul_booster2', 'cumul', 'cumul_partial_adol', 'cumul_full_adol',
+                   'cumul_booster_adol','cumul_booster2_adol','cumul_partial_child','cumul_full_child',
+                   'cumul_booster_child','cumul_booster2_child','pfizer3','pfizer4','sinovac3','sinovac4',
+                   'astra3', 'astra4','sinopharm1','sinopharm2','sinopharm3','sinopharm4','cansino', 'cansino3','cansino4'
+                   ,'pending1','pending2','pending3','pending4'], axis=1, inplace=True)
+
+combined_df = pd.merge(df, df2, on='date', how='inner')
+result_2 = combined_df[98:645].copy()
+
+result_2.to_csv('Time.csv')
+
+
+new_result_2 = result_2.drop(['date'], axis=1, inplace=True)
+
+total_vaccine = result_2[['pfizer1', 'pfizer2', 'sinovac1', 'sinovac2', 'astra1','astra2']].sum()
+total_vaccine.to_csv('total_vaccine.csv')
+
+filtered_data = result_2[result_2['vaxtype'].isin(['pfizer', 'sinovac', 'astrazeneca'])]
+total_side_effect = filtered_data.groupby('vaxtype')[['daily_nonserious_mysj_dose1', 'daily_nonserious_mysj_dose2']].sum()
+total_side_effect.to_csv('total_side_effect_vaccine.csv')
+
+df3 = pd.read_csv('total_side_effect_vaccine_edited.csv')
+
 result = result_2[result_2['vaxtype'].isin(['pfizer', 'sinovac', 'astrazeneca', 'sinopharm'])].groupby('vaxtype').sum()
+
+df3_selected = df3[['vaxtype', 'total_dose_1', 'total_dose_2']]
+
+combine_result = pd.merge(result, df3_selected, on='vaxtype', how='inner')
+
+combine_result.drop(['pfizer1', 'pfizer2', 'sinovac1', 'sinovac2', 'astra1', 'astra2'], axis=1, inplace=True)
+
+combine_result.to_csv('final_file.csv')
+
 grouped_data = result_2.groupby('vaxtype')['daily_total'].sum()
 dose1_dose2 = result_2.groupby('vaxtype')[['daily_nonserious_mysj_dose1' , 'daily_nonserious_mysj_dose2']].sum()
 side_effect_1 = result_2.groupby('vaxtype')[['d1_site_swelling', 'd1_site_redness','d1_tiredness'
@@ -24,6 +58,8 @@ side_effect_2 = result_2.groupby('vaxtype')[['d2_site_swelling', 'd2_site_rednes
                                              , 'd2_weakness', 'd2_fever', 'd2_vomiting'
                                              , 'd2_chills', 'd2_rash']].sum()
 
+
+dose1_dose2_describe = dose1_dose2.describe()
 
 #plotting vaxtype with the daily_total vaccine side effects
 ax = grouped_data.plot(kind='bar', figsize=(10, 6))
