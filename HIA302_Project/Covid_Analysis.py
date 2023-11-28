@@ -28,6 +28,7 @@ result_2.to_csv('Time.csv')
 
 new_result_2 = result_2.drop(['date'], axis=1, inplace=True)
 
+
 total_vaccine = result_2[['pfizer1', 'pfizer2', 'sinovac1', 'sinovac2', 'astra1','astra2']].sum()
 total_vaccine.to_csv('total_vaccine.csv')
 
@@ -47,7 +48,7 @@ combine_result.drop(['pfizer1', 'pfizer2', 'sinovac1', 'sinovac2', 'astra1', 'as
 
 combine_result.to_csv('final_file.csv')
 
-grouped_data = result_2.groupby('vaxtype')['daily_total'].sum()
+grouped_data = combine_result.groupby('vaxtype')[['daily_total', 'total_dose_1', 'total_dose_2']].sum()
 dose1_dose2 = result_2.groupby('vaxtype')[['daily_nonserious_mysj_dose1' , 'daily_nonserious_mysj_dose2']].sum()
 side_effect_1 = result_2.groupby('vaxtype')[['d1_site_swelling', 'd1_site_redness','d1_tiredness'
                                              , 'd1_headache', 'd1_muscle_pain', 'd1_joint_pain'
