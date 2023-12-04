@@ -8,11 +8,14 @@
 ### HIA_Project302 jupyter file.
 
 **Contributions**
-1) Kamal Ariffin bin Mohd Paiz
-2) Simranjeet Kuar
-3) Yee Li Xien
-4) Lau Xiao En
-5) Ahmad Azfar Bin Hamdan
++ Kamal Ariffin bin Mohd Paiz
++ Simranjeet Kuar
++ Yee Li Xien
++ Lau Xiao En
++ Ahmad Azfar Bin Hamdan
+
+---------------------------------------
+### Datasets.
 
 1) `vaxtype`: Type of vaccine.
 2) `daily_total`: Total number of side effect reported both dose 1 and dose 2 on that date.
