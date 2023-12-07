@@ -7,7 +7,7 @@
 
 ### HIA_Project302 jupyter file.
 
-**Contributions**
+**Contributer**
 + Kamal Ariffin bin Mohd Paiz
 + Simranjeet Kuar
 + Yee Li Xien
