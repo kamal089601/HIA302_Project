@@ -4,12 +4,13 @@
 + Datasets imported from kkm/covid-19-public repositories.
 + aefi.csv for the daily non serious side effect for each vaccine.
 + vax.malaysia.csv total number of administration vaccine.
++ aefi_serious.csv for serious side effects reported
 
 ### HIA_Project302 jupyter file.
 
 **Contributer**
 + Kamal Ariffin bin Mohd Paiz
-+ Simranjeet Kuar
++ Simranjeet Kaur
 + Yee Li Xien
 + Lau Xiao En
 + Ahmad Azfar Bin Hamdan
@@ -50,5 +51,9 @@
 31) `sinovac2`: Total number of dose 2 sinovac administered.
 32) `astra1`: Total number of dose 1 astra adminsitered.
 33) `astra2`: Total number of dose 2 astra administered.
+34) 'suspected_anaphylaxis': Anaphylaxis cases reported after vaccination
+35) 'acute_facial _paralysis': Facial paralysis reported after vaccination
+36) 'venous_thromboembolism': Venous Thromboemboliosm reported after vaccination
+37) 'myo_pericarditis': Myopericarditis reported after vaccination.
 
 
